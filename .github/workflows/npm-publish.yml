@@ -15,6 +15,8 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
+      - run: git config --global user.name "kobenguyent"
+      - run: git config --global user.email "kobenguyent@gmail.com"
       - run: npm i && npm run test && npm run buildcjs
       - run: npm config set access public && npx semantic-release
         env:
