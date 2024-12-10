@@ -1,14 +1,14 @@
-export function maskSensitiveData(input) {
+export function maskSensitiveData(input, customPatterns = []) {
     if (!input || typeof input !== 'string') {
         throw new Error('Input must be a valid string');
     }
 
     // Reusable regex for sensitive data values
     const sensitiveValuePattern = '([a-zA-Z0-9\\-._~+!/]+=*)';
-    const obsfucatedString = '****'
+    const obsfucatedString = '****';
 
-    // Patterns for sensitive data
-    const patterns = [
+    // Predefined patterns for sensitive data
+    const predefinedPatterns = [
         {
             name: 'Authorization Header',
             regex: new RegExp(`"Authorization"\\s*:\\s*"Bearer\\s+${sensitiveValuePattern}"`, 'gi'),
@@ -65,6 +65,9 @@ export function maskSensitiveData(input) {
             mask: `"Authorization": "Basic ${obsfucatedString}"`,
         },
     ];
+
+    // Combine predefined patterns with custom patterns
+    const patterns = [...predefinedPatterns, ...customPatterns];
 
     let maskedString = input;
 

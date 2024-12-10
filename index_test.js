@@ -84,4 +84,20 @@ describe('maskSensitiveData', () => {
         const result = maskSensitiveData(input);
         expect(result).to.equal(input);
     });
+
+    it('should accept the custom pattern to mask sensitive data', () => {
+        const customPatterns = [
+            {
+                name: 'Custom API Key',
+                regex: new RegExp(`"custom[-_]?api[-_]?key"\\s*:\\s*"([a-zA-Z0-9\\-._~+!/]+=*)"`, 'gi'),
+                mask: `"custom-api-key": "****"`,
+            },
+        ];
+
+        const input = '{"custom-api-key": "abc123", "password": "secret"}';
+        const expected = '{"custom-api-key": "****", "password": "****"}';
+
+        const result = maskSensitiveData(input, customPatterns);
+        expect(result).to.equal(expected);
+    });
 });
