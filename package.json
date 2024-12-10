@@ -16,6 +16,7 @@
   "author": "kobenguyent",
   "license": "MIT",
   "type": "module",
+  "types": "types.d.ts",
   "devDependencies": {
     "chai": "^5.1.2",
     "mocha": "^11.0.1",
@@ -28,7 +29,8 @@
   "files": [
     "index.cjs",
     "index.js",
-    "README.md"
+    "README.md",
+    "types.d.ts"
   ],
   "repository": {
     "type": "git",
